@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { ArrowLeft, Eye, EyeOff } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import Image from "next/image"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
 
 export default function SignIn() {
-  const router = useRouter()
-  const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Add your authentication logic here
-    console.log("Sign in attempted with:", { email, password })
-  }
+    console.log("Sign in attempted with:", { email, password });
+  };
 
   return (
     <div className="min-h-screen bg-white p-4 md:p-8">
@@ -75,15 +75,12 @@ export default function SignIn() {
 
               <div className="flex items-center space-x-2">
                 <Checkbox id="remember" />
-                <label
-                  htmlFor="remember"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
+                <label htmlFor="remember" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Keep me logged in
                 </label>
               </div>
 
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                 Sign in
               </Button>
 
@@ -96,7 +93,7 @@ export default function SignIn() {
                 </div>
               </div>
 
-              <Button type="button" variant="outline" className="w-full" onClick={() => console.log("Google sign in")}>
+              <Button type="button" variant="outline" className="w-full " onClick={() => console.log("Google sign in")}>
                 <Image src="/google.svg" alt="Google" width={20} height={20} className="mr-2" />
                 Sign in with Google
               </Button>
@@ -112,19 +109,12 @@ export default function SignIn() {
 
           {/* Logo Section */}
           <div className="hidden md:flex justify-center items-center">
-            <div className="w-64 h-64 relative">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ZQXC5YLomCJqK2HdA4IELwEr8DJWb9.png"
-                alt="Virtual Vogue Logo"
-                width={400}
-                height={400}
-                className="object-contain"
-              />
+            <div className="w-[500px] h-[500px] relative">
+              <Image src="/logo.svg" alt="Virtual Vogue Logo" width={700} height={700} className="object-contain" />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

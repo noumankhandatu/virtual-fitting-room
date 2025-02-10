@@ -44,9 +44,9 @@ export function HeroSection() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl ml-auto">
             <h1 className="text-white">
-              <i className="block font-script text-6xl md:text-7xl mb-4">Bringing the</i>
-              <span className="block text-5xl md:text-7xl text-black font-bold mb-4">FITTING ROOM</span>
-              <span className="block font-script text-7xl text-black font-bold md:text-7xl">to you</span>
+              <i className="block font-script text-6xl md:text-7xl mb-4 itallic-font">Bringing the</i>
+              <span className="block text-5xl md:text-7xl text-black font-bold mb-4 bebas-font">FITTING ROOM</span>
+              <span className="block font-script text-7xl text-white  md:text-7xl itallic-font">to you</span>
             </h1>
             <p className="text-white/90 text-lg mt-6 mb-8 max-w-lg">See how outfits fit on you instantly with our AI-powered Virtual Try-On!</p>
           </div>

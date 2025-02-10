@@ -19,7 +19,7 @@ export function NavBar() {
             EDIT CATALOG
           </Link> */}
           <Link href="/signin">
-            <Button size="lg" className="bg-black text-white hover:bg-black/80 text-lg px-8 py-6 rounded-full">
+            <Button size="lg" className="bg-black text-white hover:bg-black/80 text-lg px-8 py-6 rounded-full bebas-font ">
               Login to Try-on!
             </Button>
           </Link>

@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { ArrowLeft, Eye, EyeOff, Calendar } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Calendar as CalendarComponent } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import Image from "next/image"
-import { format } from "date-fns"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Eye, EyeOff, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Image from "next/image";
+import { format } from "date-fns";
 
 export default function SignUp() {
-  const router = useRouter()
-  const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-  })
-  const [date, setDate] = useState<Date>()
+  });
+  const [date, setDate] = useState<Date>();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Add your registration logic here
-    console.log("Sign up attempted with:", { ...formData, dateOfBirth: date })
-  }
+    console.log("Sign up attempted with:", { ...formData, dateOfBirth: date });
+  };
 
   return (
     <div className="min-h-screen bg-white p-4 md:p-8">
@@ -59,10 +59,7 @@ export default function SignUp() {
                 <label className="text-sm font-medium">Date of Birth</label>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className={`w-full justify-start text-left font-normal ${!date && "text-muted-foreground"}`}
-                    >
+                    <Button variant="outline" className={`w-full justify-start text-left font-normal ${!date && "text-muted-foreground"}`}>
                       <Calendar className="mr-2 h-4 w-4" />
                       {date ? format(date, "PPP") : "Pick a date"}
                     </Button>
@@ -111,7 +108,7 @@ export default function SignUp() {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                 Sign up
               </Button>
 
@@ -135,24 +132,18 @@ export default function SignUp() {
                   Sign in
                 </Link>
               </p>
+              <Link href="/gender-fit">Go to Gender page</Link>
             </form>
           </div>
 
           {/* Logo Section */}
           <div className="hidden md:flex justify-center items-center">
-            <div className="w-64 h-64 relative">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-GpETPLq6qxdcs8dbRk0zPuROU32hVj.png"
-                alt="Virtual Vogue Logo"
-                width={400}
-                height={400}
-                className="object-contain"
-              />
+            <div className="w-[500px] h-[500px] relative">
+              <Image src="/logo.svg" alt="Virtual Vogue Logo" width={700} height={700} className="object-contain" />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
