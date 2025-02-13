@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ProtectedNavbar from "@/components/global/protectednavbar";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
+import Loader from "@/components/loader";
 
 // Product type definition
 interface Product {
@@ -50,6 +52,8 @@ export default function MenTops() {
     return `PKR ${price.toLocaleString()}`;
   };
 
+  const { isLoading } = useProtectedRoute();
+  if (isLoading) return <Loader />;
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}

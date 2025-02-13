@@ -1,12 +1,15 @@
+"use client";
+
 import Welcome from "@/sections/welcome";
-import React from "react";
 import "../styles/globals.css";
-const page = () => {
-  return (
-    <div>
-      <Welcome />
-    </div>
-  );
+import useAuthRedirect from "@/hooks/useAuthRedirect";
+
+const Page = () => {
+  const { isLoading } = useAuthRedirect();
+
+  if (isLoading) return <p>Loading...</p>;
+
+  return <Welcome />;
 };
 
-export default page;
+export default Page;

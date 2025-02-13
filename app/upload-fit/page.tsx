@@ -1,18 +1,26 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Upload, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import ProtectedNavbar from "@/components/global/protectednavbar";
 import "../../styles/globals.css";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
+import Loader from "@/components/loader";
+
 export default function UploadFit() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [selectedGarment, setSelectedGarment] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showCamera, setShowCamera] = useState(false);
+
+  // Effect to start camera after the state updates
+  useEffect(() => {
+    if (showCamera) {
+      startCamera();
+    }
+  }, [showCamera]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -28,28 +36,48 @@ export default function UploadFit() {
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        setShowCamera(true);
+
+      if (!videoRef.current) {
+        console.error("videoRef.current is null! Waiting for video element to render...");
+        return;
       }
+
+      videoRef.current.srcObject = stream;
+      videoRef.current.onloadedmetadata = () => {
+        videoRef.current?.play();
+      };
     } catch (err) {
       console.error("Error accessing camera:", err);
     }
   };
 
   const takePhoto = () => {
-    if (videoRef.current) {
-      const canvas = document.createElement("canvas");
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      canvas.getContext("2d")?.drawImage(videoRef.current, 0, 0);
-      const image = canvas.toDataURL("image/jpeg");
-      setSelectedImage(image);
-      setShowCamera(false);
-      // Stop all video streams
-      const stream = videoRef.current.srcObject as MediaStream;
-      stream?.getTracks().forEach((track) => track.stop());
+    if (!videoRef.current) {
+      console.error("Video element not found!");
+      return;
     }
+
+    const canvas = document.createElement("canvas");
+    const video = videoRef.current;
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.error("Failed to get 2D context from canvas!");
+      return;
+    }
+
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const image = canvas.toDataURL("image/jpeg");
+    setSelectedImage(image);
+
+    // Stop the camera stream
+    const stream = video.srcObject as MediaStream;
+    stream?.getTracks().forEach((track) => track.stop());
+
+    setShowCamera(false); // Hide the camera after taking the photo
   };
 
   const handleTryOn = () => {
@@ -57,14 +85,10 @@ export default function UploadFit() {
       alert("Please upload or take a picture first");
       return;
     }
-    if (!selectedGarment) {
-      alert("Please select a garment type");
-      return;
-    }
-    // Add your try-on logic here
-    console.log("Processing try-on with:", { selectedImage, selectedGarment });
   };
 
+  const { isLoading } = useProtectedRoute();
+  if (isLoading) return <Loader />;
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -93,7 +117,7 @@ export default function UploadFit() {
                   <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept="image/*" className="hidden" />
                 </div>
                 <div className="text-gray-500">-OR-</div>
-                <Button variant="outline" className="w-full" onClick={startCamera}>
+                <Button variant="outline" className="w-full" onClick={() => setShowCamera(true)}>
                   <Camera className="w-6 h-6 mr-2 bebas-font" />
                   Take a picture
                 </Button>
@@ -104,7 +128,9 @@ export default function UploadFit() {
           {/* Preview Section */}
           <div className="bg-gray-100 rounded-3xl p-8 flex items-center justify-center min-h-[400px]">
             {selectedImage ? (
-              <Image src={selectedImage || "/placeholder.svg"} alt="Preview" width={300} height={400} className="object-contain max-h-full" />
+              <Image src={selectedImage} alt="Preview" width={300} height={400} className="object-contain max-h-full" />
+            ) : showCamera ? (
+              <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
             ) : (
               <Image
                 src="/placeholder.svg?height=400&width=300"
@@ -115,21 +141,6 @@ export default function UploadFit() {
               />
             )}
           </div>
-        </div>
-
-        {/* Garment Selection */}
-        <div className="mt-8 max-w-xs mx-auto">
-          <Select onValueChange={setSelectedGarment}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select garment type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="tshirt bebas-font">T-Shirt</SelectItem>
-              <SelectItem value="shirt bebas-font">Shirt</SelectItem>
-              <SelectItem value="sweater bebas-font">Sweater</SelectItem>
-              <SelectItem value="jacket bebas-font">Jacket</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
 
         {/* Try-On Button */}
