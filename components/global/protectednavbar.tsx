@@ -7,12 +7,13 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import Loader from "../loader";
 
 const ProtectedNavbar = () => {
   const { user, isLoading } = useUser();
   const [open, setOpen] = useState(false); // State to toggle profile popup
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) return <Loader />;
 
   return (
     <div>

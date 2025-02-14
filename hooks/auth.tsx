@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/navigation"; // ✅ Using next/navigation for App Router
+import Loader from "@/components/loader";
 
 const Auth = () => {
   const { user, error, isLoading } = useUser();
@@ -24,7 +25,7 @@ const Auth = () => {
     }
   }, [user, isLoading]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>{error.message}</div>;
 
   return <div></div>;
