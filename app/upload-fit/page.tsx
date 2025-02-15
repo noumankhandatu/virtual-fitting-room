@@ -8,8 +8,13 @@ import ProtectedNavbar from "@/components/global/protectednavbar";
 import "../../styles/globals.css";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Loader from "@/components/loader";
+import { useAppStore } from "@/zustand/store";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function UploadFit() {
+  const { setHumanImage } = useAppStore();
+  const router = useRouter();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -85,10 +90,22 @@ export default function UploadFit() {
       alert("Please upload or take a picture first");
       return;
     }
+
+    // Convert base64 to a File before storing (if needed)
+    fetch(selectedImage)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], "human-image.jpg", { type: blob.type });
+        setHumanImage(file);
+      })
+      .catch((error) => console.error("Error processing image:", error));
+
+    router.push("/final-image");
   };
 
   const { isLoading } = useProtectedRoute();
   if (isLoading) return <Loader />;
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
