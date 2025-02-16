@@ -1,18 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import { useAppStore } from "@/zustand/store";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios";
 import ProtectedNavbar from "@/components/global/protectednavbar";
+import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-const API_URL = "https://da0f-34-57-29-232.ngrok-free.app/try_on";
+const API_URL = "https://1fb2-34-59-190-38.ngrok-free.app/try_on";
 
 const Page = () => {
+  const router = useRouter();
+
   const { garment_image, human_image, garment_description, category, denoise_steps, seed, number_of_images } = useAppStore();
 
   const [loading, setLoading] = useState(false);
+  const [outputImage, setOutputImage] = useState<string | null>(null);
 
   const handleApiCall = async () => {
     if (!garment_image || !human_image) {
@@ -36,14 +40,18 @@ const Page = () => {
       });
 
       console.log("API Response:", response.data);
-      alert("API Call Successful!");
+
+      if (response.data?.images?.length > 0) {
+        // Convert Base64 to Data URL
+        const base64Image = response.data.images[0];
+        const imageUrl = `data:image/png;base64,${base64Image}`;
+        setOutputImage(imageUrl);
+      } else {
+        alert("No image received from API!");
+      }
     } catch (error) {
       console.error("Error calling API:", error);
-      if (axios.isAxiosError(error)) {
-        alert(error.response?.data?.message || "Something went wrong! Please try again.");
-      } else {
-        alert("Something went wrong! Please try again.");
-      }
+      alert("Something went wrong! Please try again.");
     } finally {
       setLoading(false);
     }
@@ -52,85 +60,63 @@ const Page = () => {
   return (
     <div>
       <ProtectedNavbar />
-      <div className="min-h-screen flex flex-col items-center justify-center p-10 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-8 ">Overview</h1>
 
-        {/* Data Table */}
-        <div className="w-full max-w-4xl mb-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-1/3">Property</TableHead>
-                <TableHead>Value</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">Garment Description</TableCell>
-                <TableCell>{garment_description || "N/A"}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Category</TableCell>
-                <TableCell className="capitalize">{category?.replace("_", " ") || "N/A"}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Denoise Steps</TableCell>
-                <TableCell>{denoise_steps || "N/A"}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Seed</TableCell>
-                <TableCell>{seed || "N/A"}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Number of Images</TableCell>
-                <TableCell>{number_of_images || "N/A"}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+      <div className="min-h-screen flex flex-col items-center justify-center p-10 ">
+        <div className="container mx-auto px-4 py-8 flex justify-center">
+          <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
+            <ArrowLeft className="w-4 h-4" />
+            <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
+          </button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full ">
+          {garment_image ? (
+            <div className="flex justify-center items-center flex-col  ">
+              <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                <Image
+                  src={URL.createObjectURL(garment_image)}
+                  alt={"grament"}
+                  height={300}
+                  width={300}
+                  className="h-[300px] w-auto bg-[#E1E1E1]  "
+                />
+              </div>
+            </div>
+          ) : (
+            <p className="text-gray-500">No image uploaded</p>
+          )}
+
+          {human_image ? (
+            <div className="flex justify-center items-center flex-col  ">
+              <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                <Image src={URL.createObjectURL(human_image)} alt={"grament"} height={300} width={300} className="h-[300px] w-auto bg-[#E1E1E1]  " />
+              </div>
+            </div>
+          ) : (
+            <p className="text-gray-500">No image uploaded</p>
+          )}
         </div>
 
-        {/* Image Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
-          {/* Garment Image */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Garment Image</CardTitle>
-            </CardHeader>
-            <CardContent className="flex justify-center">
-              {garment_image ? (
-                <img src={URL.createObjectURL(garment_image)} alt="Garment" className="rounded-lg w-40 h-40 object-cover shadow" />
-              ) : (
-                <p className="text-gray-500">No image uploaded</p>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Human Image */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Human Image</CardTitle>
-            </CardHeader>
-            <CardContent className="flex justify-center">
-              {human_image ? (
-                <img src={URL.createObjectURL(human_image)} alt="Human" className="rounded-lg w-40 h-40 object-cover shadow" />
-              ) : (
-                <p className="text-gray-500">No image uploaded</p>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-
+        {outputImage && (
+          <div className="mt-10">
+            <div className="flex justify-center items-center flex-col  ">
+              <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                <Image src={outputImage} alt={"grament"} height={300} width={300} className="h-[300px] w-auto bg-[#E1E1E1]  " />
+              </div>
+            </div>
+          </div>
+        )}
         {/* API Call Button */}
         <Button
           onClick={handleApiCall}
           disabled={loading}
-          className={`mt-8 text-white text-lg px-6 py-3 rounded-full shadow-lg ${
+          className={`mt-8 text-white text-lg px-10 py-3 h-[50px] rounded-full shadow-lg ${
             loading ? "bg-gray-500 cursor-not-allowed" : "bg-black hover:bg-black/80"
           }`}
         >
           {loading ? "Processing..." : "Try On Outfit"}
         </Button>
       </div>
+      {/* Output Image Display */}
     </div>
   );
 };

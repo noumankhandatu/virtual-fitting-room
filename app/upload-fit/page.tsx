@@ -2,14 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Upload, Camera } from "lucide-react";
+import { Upload, Camera, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProtectedNavbar from "@/components/global/protectednavbar";
 import "../../styles/globals.css";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Loader from "@/components/loader";
 import { useAppStore } from "@/zustand/store";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function UploadFit() {
@@ -110,12 +109,17 @@ export default function UploadFit() {
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <ProtectedNavbar />
-
+      <div className="container mx-auto px-4 py-8 flex justify-center">
+        <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
+          <ArrowLeft className="w-4 h-4" />
+          <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
+        </button>
+      </div>
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Upload Section */}
-          <div className="bg-gray-100 rounded-3xl p-8 flex flex-col items-center justify-center min-h-[400px] relative">
+          <div className="bg-gray-100  p-8 flex flex-col items-center justify-center min-h-[400px] relative rounded-[70px]">
             {showCamera ? (
               <div className="w-full h-full">
                 <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
@@ -124,9 +128,9 @@ export default function UploadFit() {
                 </Button>
               </div>
             ) : (
-              <div className="text-center space-y-8">
+              <div className="text-center space-y-8 ">
                 <div
-                  className="cursor-pointer p-8 border-2 border-dashed border-gray-300 rounded-xl hover:border-gray-400 transition"
+                  className="cursor-pointer p-8 border-2 border-dashed  border-gray-300 rounded-xl hover:border-gray-400 transition"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
@@ -143,7 +147,7 @@ export default function UploadFit() {
           </div>
 
           {/* Preview Section */}
-          <div className="bg-gray-100 rounded-3xl p-8 flex items-center justify-center min-h-[400px]">
+          <div className="bg-gray-100  p-8 flex items-center justify-center min-h-[400px]  rounded-[70px]">
             {selectedImage ? (
               <Image src={selectedImage} alt="Preview" width={300} height={400} className="object-contain max-h-full" />
             ) : showCamera ? (

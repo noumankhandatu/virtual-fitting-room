@@ -15,15 +15,7 @@ export default function GenderFit() {
   if (isLoading) return <Loader />;
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
       <ProtectedNavbar />
-      {/* Back Button */}
-      {/* <div className="container mx-auto px-4 py-8 flex justify-center">
-        <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
-          <ArrowLeft className="w-4 h-4" />
-          <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
-        </button>
-      </div> */}
 
       {/* Gender Selection */}
       <div className="container mx-auto justify-center px-4 py-8">

@@ -8,7 +8,7 @@ export function NavBar() {
         <Link href="/" className="text-white text-3xl font-bold">
           <img src="/logo.svg" alt="" />
         </Link>
-        <div className="hidden md:flex space-x-8 items-center">
+        <div className=" md:flex space-x-8 items-center">
           <Button
             onClick={() => (window.location.href = "/api/auth/login")}
             size="lg"

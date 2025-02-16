@@ -20,11 +20,11 @@ const ProtectedNavbar = () => {
       <nav className="p-4">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
-          <Image src="/logo.svg" alt="Virtual Vogue" width={80} height={80} className="object-contain" />
+          <Image src="/logo.svg" alt="Virtual Vogue" width={150} height={150} className="object-contain" />
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/gender-fit" className="text-gray-800 hover:text-gray-600 transition text-[20px] bebas-font">
+          <div className="flex items-center space-x-8">
+            <Link href="/gender-fit" className="text-gray-800 hover:text-gray-600 transition text-[20px] bebas-font hidden md:flex">
               Gender Fit
             </Link>
 
@@ -48,7 +48,7 @@ const ProtectedNavbar = () => {
                   </Avatar>
 
                   {/* User Details */}
-                  <p className="text-lg font-semibold">{user?.name}</p>
+                  <p className="text-lg font-semibold truncate w-48">{user?.name}</p>
                   <p className="text-sm text-gray-500 truncate w-48">{user?.email}</p>
 
                   {/* Logout Button */}
