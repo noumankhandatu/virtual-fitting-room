@@ -25,11 +25,10 @@ export default function ClothFit() {
 
   const handleCategory = (e: string) => {
     const payload = `${e} of ${slug}`.toString();
-
-    if (slug === "Brown Top") {
+    if (e === brownTop) {
       setCategory(upperBody);
     }
-    if (slug === "Brown Bottoms") {
+    if (e === brownBottom) {
       setCategory(lowerBody);
     }
 

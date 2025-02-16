@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import ProtectedNavbar from "@/components/global/protectednavbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Loader from "@/components/loader";
-import { products } from "@/app/all-items/[gender]/[slug]/page";
+import { products } from "@/data/product-data";
 import { useAppStore } from "@/zustand/store";
 
 export default function ProductDetail() {

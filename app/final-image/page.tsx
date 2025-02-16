@@ -8,7 +8,7 @@ import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const API_URL = "https://1fb2-34-59-190-38.ngrok-free.app/try_on";
+const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
 
 const Page = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Page = () => {
     const formData = new FormData();
     formData.append("garment_image", garment_image);
     formData.append("human_image", human_image);
-    formData.append("garment_description", garment_description);
+    formData.append("garment_description", garment_description.replace(/"/g, ""));
     formData.append("category", category);
     formData.append("denoise_steps", denoise_steps.toString());
     formData.append("seed", seed.toString());
@@ -60,62 +60,92 @@ const Page = () => {
   return (
     <div>
       <ProtectedNavbar />
-
-      <div className="min-h-screen flex flex-col items-center justify-center p-10 ">
-        <div className="container mx-auto px-4 py-8 flex justify-center">
-          <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
-            <ArrowLeft className="w-4 h-4" />
-            <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
-          </button>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full ">
-          {garment_image ? (
-            <div className="flex justify-center items-center flex-col  ">
-              <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
-                <Image
-                  src={URL.createObjectURL(garment_image)}
-                  alt={"grament"}
-                  height={300}
-                  width={300}
-                  className="h-[300px] w-auto bg-[#E1E1E1]  "
-                />
-              </div>
-            </div>
-          ) : (
-            <p className="text-gray-500">No image uploaded</p>
-          )}
-
-          {human_image ? (
-            <div className="flex justify-center items-center flex-col  ">
-              <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
-                <Image src={URL.createObjectURL(human_image)} alt={"grament"} height={300} width={300} className="h-[300px] w-auto bg-[#E1E1E1]  " />
-              </div>
-            </div>
-          ) : (
-            <p className="text-gray-500">No image uploaded</p>
-          )}
-        </div>
-
-        {outputImage && (
-          <div className="mt-10">
-            <div className="flex justify-center items-center flex-col  ">
-              <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
-                <Image src={outputImage} alt={"grament"} height={300} width={300} className="h-[300px] w-auto bg-[#E1E1E1]  " />
-              </div>
-            </div>
+      {outputImage && (
+        <>
+          <div className="container mx-auto px-4 py-8 flex justify-center">
+            <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
+              <ArrowLeft className="w-4 h-4" />
+              <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
+            </button>
           </div>
-        )}
-        {/* API Call Button */}
-        <Button
-          onClick={handleApiCall}
-          disabled={loading}
-          className={`mt-8 text-white text-lg px-10 py-3 h-[50px] rounded-full shadow-lg ${
-            loading ? "bg-gray-500 cursor-not-allowed" : "bg-black hover:bg-black/80"
-          }`}
-        >
-          {loading ? "Processing..." : "Try On Outfit"}
-        </Button>
-      </div>
+
+          <p className=" text-2xl font-bold tracking-wider bebas-font text-center"> VOILA! IT LOOKS LIKE YOUR PERFECT FIT!</p>
+          <div className="relative flex items-center justify-center p-10 ">
+            {/* Background Image */}
+            <img src="/finalimage1.png" alt="" className="h-[230px] lg:h-[500px] w-auto  " />
+
+            {/* Foreground (Top) Image */}
+            <img className="absolute  left-1/2 transform -translate-x-1/2 lg:w-[340px] lg:h-[500px]" src={outputImage} alt="" />
+          </div>
+        </>
+      )}
+
+      {!outputImage && (
+        <>
+          <div className="min-h-screen flex flex-col items-center justify-center p-10 ">
+            <div className="container mx-auto px-4 py-8 flex justify-center">
+              <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
+                <ArrowLeft className="w-4 h-4" />
+                <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full ">
+              {garment_image ? (
+                <div className="flex justify-center items-center flex-col  ">
+                  <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                    <Image
+                      src={URL.createObjectURL(garment_image)}
+                      alt={"grament"}
+                      height={300}
+                      width={300}
+                      className="h-[300px] w-auto bg-[#E1E1E1]  "
+                    />
+                  </div>
+                </div>
+              ) : (
+                <p className="text-gray-500">No image uploaded</p>
+              )}
+
+              {human_image ? (
+                <div className="flex justify-center items-center flex-col  ">
+                  <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                    <Image
+                      src={URL.createObjectURL(human_image)}
+                      alt={"grament"}
+                      height={300}
+                      width={300}
+                      className="h-[300px] w-auto bg-[#E1E1E1]  "
+                    />
+                  </div>
+                </div>
+              ) : (
+                <p className="text-gray-500">No image uploaded</p>
+              )}
+            </div>
+
+            {outputImage && (
+              <div className="mt-10">
+                <div className="flex justify-center items-center flex-col  ">
+                  <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                    <Image src={outputImage} alt={"grament"} height={300} width={300} className="h-[300px] w-auto bg-[#E1E1E1]  " />
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* API Call Button */}
+            <Button
+              onClick={handleApiCall}
+              disabled={loading}
+              className={`mt-8 text-white text-lg px-10 py-3 h-[50px] rounded-full shadow-lg ${
+                loading ? "bg-gray-500 cursor-not-allowed" : "bg-black hover:bg-black/80"
+              }`}
+            >
+              {loading ? "Processing..." : "Try On Outfit"}
+            </Button>
+          </div>
+        </>
+      )}
+
       {/* Output Image Display */}
     </div>
   );
