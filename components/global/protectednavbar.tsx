@@ -52,8 +52,9 @@ const ProtectedNavbar = () => {
                   <p className="text-sm text-gray-500 truncate w-48">{user?.email}</p>
 
                   {/* Logout Button */}
+
                   <Button className="w-full mt-4 bg-red-500 hover:bg-red-600" asChild>
-                    <Link href="/api/auth/logout">Logout</Link>
+                    <a href="/api/auth/logout">Logout</a>
                   </Button>
                 </div>
               </PopoverContent>
