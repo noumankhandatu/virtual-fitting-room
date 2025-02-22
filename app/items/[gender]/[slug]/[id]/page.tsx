@@ -45,7 +45,7 @@ export default function ProductDetail() {
     <div className="min-h-screen bg-white">
       <ProtectedNavbar />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto ">
         <div className="flex items-center justify-center space-x-4 mb-8">
           <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
             <ArrowLeft className="w-6 h-6" />
@@ -53,18 +53,21 @@ export default function ProductDetail() {
           <h1 className="text-2xl font-bold tracking-wider bebas-font uppercase">Go Back</h1>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 justify-center items-center">
+        <div className="grid md:grid-cols-2 gap-8 justify-center items-center lg:pl-20 lg:pr-20">
           <div className="flex justify-center items-center flex-col  ">
-            <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+            <div
+              data-aos="fade-down"
+              className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl"
+            >
               <Image src={product.image} alt={product.name} height={300} width={300} className="h-[300px] w-auto bg-[#E1E1E1]  " />
             </div>
           </div>
-          <div className="space-y-6">
-            <h1 className="text-2xl font-medium bebas-font">{product.name}</h1>
-            <p className="text-xl font-medium bebas-font">PKR {product.price.toLocaleString()}</p>
-            <p className="text-xl font-medium bebas-font"> {product.description}</p>
-
+          <div data-aos="fade-down" className="space-y-6">
             <p className="text-xl font-medium bebas-font"> {slug === "upper_body" ? "TOPS" : "BOTTOMS"}</p>
+            <h1 className="text-2xl font-medium bebas-font">{product.name}</h1>
+            <p className="text-xl font-medium bebas-font"> {product.description}</p>
+            <p className="text-xl font-medium bebas-font">PKR {product.price.toLocaleString()}</p>
+
             <div style={{ height: 10 }} />
             <Link href={"/upload-fit"}>
               <Button className="w-full h-[50px] bebas-font rounded-3xl" size="lg" onClick={handleGarmentImage}>

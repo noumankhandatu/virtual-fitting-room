@@ -106,24 +106,24 @@ export default function UploadFit() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className=" bg-white">
       {/* Navigation */}
       <ProtectedNavbar />
-      <div className="container mx-auto px-4 py-8 flex justify-center">
+      <div className="container mx-auto  flex justify-center">
         <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
           <ArrowLeft className="w-4 h-4" />
           <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
         </button>
       </div>
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-2 gap-8">
+      <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+        <div className="grid md:grid-cols-1 gap-8 w-[50%]">
           {/* Upload Section */}
           <div className="bg-gray-100  p-8 flex flex-col items-center justify-center min-h-[400px] relative rounded-[70px]">
             {showCamera ? (
               <div className="w-full h-full">
                 <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
-                <Button onClick={takePhoto} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bebas-font">
+                <Button onClick={takePhoto} className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bebas-font">
                   Take Photo
                 </Button>
               </div>
@@ -142,35 +142,25 @@ export default function UploadFit() {
                   <Camera className="w-6 h-6 mr-2 bebas-font" />
                   Take a picture
                 </Button>
+                {selectedImage ? (
+                  <Image src={selectedImage} alt="Preview" width={300} height={400} className="object-contain max-h-full" />
+                ) : showCamera ? (
+                  <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
+                ) : null}
               </div>
-            )}
-          </div>
-
-          {/* Preview Section */}
-          <div className="bg-gray-100  p-8 flex items-center justify-center min-h-[400px]  rounded-[70px]">
-            {selectedImage ? (
-              <Image src={selectedImage} alt="Preview" width={300} height={400} className="object-contain max-h-full" />
-            ) : showCamera ? (
-              <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
-            ) : (
-              <Image
-                src="/placeholder.svg?height=400&width=300"
-                alt="Garment Preview"
-                width={300}
-                height={400}
-                className="object-contain opacity-50"
-              />
             )}
           </div>
         </div>
 
         {/* Try-On Button */}
-        <Button
-          className="w-full max-w-xs mx-auto mt-8 bg-black hover:bg-black/90 text-white  text-lg rounded-full block bebas-font"
-          onClick={handleTryOn}
-        >
-          TRY-ON!
-        </Button>
+        {selectedImage && (
+          <Button
+            className="w-full max-w-xs mx-auto mt-8 bg-black hover:bg-black/90 text-white  text-lg rounded-full block bebas-font"
+            onClick={handleTryOn}
+          >
+            TRY-ON!
+          </Button>
+        )}
       </div>
     </div>
   );

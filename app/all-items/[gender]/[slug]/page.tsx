@@ -28,7 +28,7 @@ export default function AllItems() {
   return (
     <div className="min-h-screen bg-white">
       <ProtectedNavbar />
-      <div className="container mx-auto px-4 py-8 ">
+      <div data-aos="fade-up" className="container mx-auto px-4 py-8 ">
         <div className="flex items-center justify-center space-x-4 mb-8">
           <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
             <ArrowLeft className="w-6 h-6" />
@@ -38,15 +38,15 @@ export default function AllItems() {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:pr-20 lg:pl-20 gap-10">
           {categoryProducts.map((product) => (
             <Link key={product.id} href={`/items/${gender}/${slug}/${product.id}`} className="group">
-              <div className="bg-gray-100 aspect-[4/5] relative overflow-hidden">
+              <div className="bg-gray-100 aspect-[4/5] relative overflow-hidden rounded-3xl">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover object-center transform group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover object-center transform group-hover:scale-105 transition-transform duration-300 "
                 />
               </div>
               <div className="mt-4 space-y-1 text-center">
