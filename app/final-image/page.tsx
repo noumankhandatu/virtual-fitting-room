@@ -7,6 +7,7 @@ import ProtectedNavbar from "@/components/global/protectednavbar";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import OutputImageDialog from "@/components/global/modal";
 
 const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
 
@@ -57,29 +58,33 @@ const Page = () => {
     }
   };
 
+  const handleDownload = async () => {
+    if (!outputImage) return;
+
+    try {
+      const response = await fetch(outputImage);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "generated-outfit.png"; // Set the download file name
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Clean up
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Error downloading the image:", error);
+      alert("Failed to download the image. Please try again.");
+    }
+  };
+
   return (
     <div>
       <ProtectedNavbar />
-      {outputImage && (
-        <>
-          <div className="container mx-auto px-4 py-8 flex justify-center">
-            <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
-              <ArrowLeft className="w-4 h-4" />
-              <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
-            </button>
-          </div>
-
-          <p className=" text-2xl font-bold tracking-wider bebas-font text-center"> VOILA! IT LOOKS LIKE YOUR PERFECT FIT!</p>
-          <div className="relative flex items-center justify-center p-10 ">
-            {/* Background Image */}
-            <img src="/finalimage1.png" alt="" className="h-[230px] lg:h-[500px] w-auto  " />
-
-            {/* Foreground (Top) Image */}
-            <img className="absolute  left-1/2 transform -translate-x-1/2 lg:w-[340px] lg:h-[500px]" src={outputImage} alt="" />
-          </div>
-        </>
-      )}
-
+      <OutputImageDialog outputImage={outputImage} setOutputImage={setOutputImage} />
       {!outputImage && (
         <>
           <div className="min-h-screen flex flex-col items-center justify-center p-10 ">
@@ -114,7 +119,7 @@ const Page = () => {
                       alt={"grament"}
                       height={300}
                       width={300}
-                      className="h-[300px] w-auto bg-[#E1E1E1]  "
+                      className="h-[300px] w-[300px] object-cover bg-[#E1E1E1]  "
                     />
                   </div>
                 </div>

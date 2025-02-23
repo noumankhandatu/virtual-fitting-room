@@ -63,7 +63,6 @@ export default function UploadFit() {
 
     const canvas = document.createElement("canvas");
     const video = videoRef.current;
-
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
@@ -73,7 +72,11 @@ export default function UploadFit() {
       return;
     }
 
+    // Flip the image back when drawing
+    ctx.translate(canvas.width, 0);
+    ctx.scale(-1, 1);
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
     const image = canvas.toDataURL("image/jpeg");
     setSelectedImage(image);
 
@@ -81,7 +84,7 @@ export default function UploadFit() {
     const stream = video.srcObject as MediaStream;
     stream?.getTracks().forEach((track) => track.stop());
 
-    setShowCamera(false); // Hide the camera after taking the photo
+    setShowCamera(false);
   };
 
   const handleTryOn = () => {
@@ -122,7 +125,7 @@ export default function UploadFit() {
           <div className="bg-gray-100  p-8 flex flex-col items-center justify-center min-h-[400px] relative rounded-[70px]">
             {showCamera ? (
               <div className="w-full h-full">
-                <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
+                <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl transform scale-x-[-1]" />{" "}
                 <Button onClick={takePhoto} className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bebas-font">
                   Take Photo
                 </Button>
@@ -143,7 +146,13 @@ export default function UploadFit() {
                   Take a picture
                 </Button>
                 {selectedImage ? (
-                  <Image src={selectedImage} alt="Preview" width={300} height={400} className="object-contain max-h-full" />
+                  <Image
+                    src={selectedImage}
+                    alt="Preview"
+                    width={300}
+                    height={300}
+                    className="h-[300px] w-[300px] max-w-full max-h-full object-contain"
+                  />
                 ) : showCamera ? (
                   <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl" />
                 ) : null}
