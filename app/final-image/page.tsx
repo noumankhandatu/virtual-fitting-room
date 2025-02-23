@@ -119,7 +119,7 @@ const Page = () => {
                       alt={"grament"}
                       height={300}
                       width={300}
-                      className="h-[300px] w-[300px] object-cover bg-[#E1E1E1]  "
+                      className="h-[300px] w-auto  bg-[#E1E1E1]  "
                     />
                   </div>
                 </div>
