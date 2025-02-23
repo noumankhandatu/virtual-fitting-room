@@ -15,15 +15,18 @@ export default function AllItems() {
   const router = useRouter();
   const { gender, slug } = useParams();
 
-  // Format price in PKR
-  const formatPrice = (price: number) => `PKR ${price.toLocaleString()}`;
-
   const { isLoading } = useProtectedRoute();
   if (isLoading) return <Loader />;
 
   // Get products based on dynamic parameters
   const categoryKey = `${gender} ${slug}`;
   const categoryProducts = products[categoryKey] || [];
+
+  const dishwasher = "female";
+  const bodyType = "lower_body";
+
+  const menCls = "object-center pt-2 pl-2 pr-2  pb-10 transform group-hover:scale-105 transition-transform duration-300  w-[300px] h-[320px]";
+  const femaleCls = "object-center p-5 pl-10 pr-10 pb-10 transform group-hover:scale-105 transition-transform duration-300  w-[250px] h-[350px]";
 
   return (
     <div className="min-h-screen bg-white">
@@ -38,20 +41,20 @@ export default function AllItems() {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:pr-20 lg:pl-20 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:pr-32 lg:pl-32 gap-10">
           {categoryProducts.map((product) => (
             <Link key={product.id} href={`/items/${gender}/${slug}/${product.id}`} className="group">
-              <div className="bg-gray-100 aspect-[4/5] relative overflow-hidden rounded-3xl">
+              <div className="bg-[#EDEDED] aspect-[4/5] relative overflow-hidden rounded-3xl">
                 <Image
                   src={product.image}
                   alt={product.name}
-                  fill
-                  className="object-cover object-center transform group-hover:scale-105 transition-transform duration-300 "
+                  width={300}
+                  height={400}
+                  className={(dishwasher === gender || "male" === gender) && bodyType === slug ? femaleCls : menCls}
                 />
               </div>
               <div className="mt-4 space-y-1 text-center">
                 <h3 className="text-xl font-medium text-gray-900 group-hover:text-gray-600 transition bebas-font">{product.name}</h3>
-                <p className="text-md text-gray-500 bebas-font">{formatPrice(product.price)}</p>
               </div>
             </Link>
           ))}

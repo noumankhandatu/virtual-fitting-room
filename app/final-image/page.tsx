@@ -87,8 +87,8 @@ const Page = () => {
       <OutputImageDialog outputImage={outputImage} setOutputImage={setOutputImage} />
       {!outputImage && (
         <>
-          <div className="min-h-screen flex flex-col items-center justify-center p-10 ">
-            <div className="container mx-auto px-4 py-8 flex justify-center">
+          <div className=" flex flex-col items-center justify-center p-10 ">
+            <div className="container mx-auto  flex justify-center">
               <button onClick={() => router.back()} className="flex items-center space-x-2 text-gray-800 hover:text-gray-600 transition">
                 <ArrowLeft className="w-4 h-4" />
                 <span className=" text-2xl font-bold tracking-wider bebas-font">Go Back</span>
@@ -97,13 +97,13 @@ const Page = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full ">
               {garment_image ? (
                 <div className="flex justify-center items-center flex-col  ">
-                  <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                  <div className="  bg-[#D9D9D9] lg:h-[320px] lg:w-[400px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
                     <Image
                       src={URL.createObjectURL(garment_image)}
                       alt={"grament"}
                       height={300}
                       width={300}
-                      className="h-[300px] w-auto bg-[#E1E1E1]  "
+                      className="h-[280px] w-auto bg-[#E1E1E1]  "
                     />
                   </div>
                 </div>
@@ -113,13 +113,13 @@ const Page = () => {
 
               {human_image ? (
                 <div className="flex justify-center items-center flex-col  ">
-                  <div className="  bg-[#D9D9D9] lg:h-[400px] lg:w-[500px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
+                  <div className="  bg-[#D9D9D9] lg:h-[320px] lg:w-[400px] relative flex justify-center items-center rounded-[70px] shadow-2xl">
                     <Image
                       src={URL.createObjectURL(human_image)}
                       alt={"grament"}
                       height={300}
                       width={300}
-                      className="h-[300px] w-auto  bg-[#E1E1E1]  "
+                      className="h-[280px] w-auto  bg-[#E1E1E1]  "
                     />
                   </div>
                 </div>
