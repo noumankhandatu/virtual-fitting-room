@@ -6,7 +6,7 @@ export function NavBar() {
     <nav className="fixed top-0 w-full z-50 bg-transparent">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-white  font-bold">
-          <img src="/logo.svg" alt="" className="w-[80%]" />
+          <img src="/logo.svg" alt="" className="lg:w-auto w-[80%]" />
         </Link>
         <div className=" md:flex space-x-8 items-center">
           <Button
