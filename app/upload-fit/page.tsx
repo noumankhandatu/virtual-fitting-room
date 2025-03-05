@@ -18,6 +18,7 @@ export default function UploadFit() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showCamera, setShowCamera] = useState(false);
+  const [countdown, setCountdown] = useState<number | null>(null);
 
   // Effect to start camera after the state updates
   useEffect(() => {
@@ -105,6 +106,21 @@ export default function UploadFit() {
     router.push("/final-image");
   };
 
+  const takePhotoWithTimer = () => {
+    setCountdown(5); // Start countdown from 5
+
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev === 1) {
+          clearInterval(interval);
+          takePhoto(); // Call original function after countdown ends
+          return null; // Reset countdown
+        }
+        return prev! - 1; // Decrease countdown
+      });
+    }, 1000);
+  };
+
   const { isLoading } = useProtectedRoute();
   if (isLoading) return <Loader />;
 
@@ -126,8 +142,12 @@ export default function UploadFit() {
             {showCamera ? (
               <div className="w-full h-full">
                 <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl transform scale-x-[-1]" />{" "}
-                <Button onClick={takePhoto} className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bebas-font">
-                  Take Photo
+                <Button
+                  onClick={takePhotoWithTimer}
+                  className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bebas-font"
+                  disabled={countdown !== null} // Disable while counting down
+                >
+                  {countdown !== null ? `Taking photo in ${countdown}s...` : "Take Photo"}
                 </Button>
               </div>
             ) : (
