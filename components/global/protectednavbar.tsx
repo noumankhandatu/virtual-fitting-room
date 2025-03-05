@@ -33,7 +33,7 @@ const ProtectedNavbar = () => {
               <PopoverTrigger asChild>
                 <button>
                   <Avatar className="cursor-pointer">
-                    <AvatarImage src={user?.picture || "https://github.com/shadcn.png"} />
+                    <AvatarImage src={user?.picture ? user?.picture : "https://github.com/shadcn.png"} />
                   </Avatar>
                 </button>
               </PopoverTrigger>
@@ -42,7 +42,7 @@ const ProtectedNavbar = () => {
                 <div className="flex flex-col items-center text-center">
                   {/* User Avatar */}
                   <Avatar className="w-16 h-16 mb-2">
-                    <AvatarImage src={user?.picture || "https://github.com/shadcn.png"} />
+                    <AvatarImage src={user?.picture ? user?.picture : "https://github.com/shadcn.png"} />
                   </Avatar>
 
                   {/* User Details */}
