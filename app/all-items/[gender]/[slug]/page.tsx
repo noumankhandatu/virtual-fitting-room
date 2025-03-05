@@ -135,8 +135,16 @@ export default function AllItems() {
             {showCamera ? (
               <div className="relative w-full max-w-md flex flex-col items-center">
                 <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl transform scale-x-[-1]" />
+
+                {/* Timer Display */}
+                {countdown !== null && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white text-6xl font-bold py-4 px-6 rounded-lg">
+                    {countdown}
+                  </div>
+                )}
+
                 <Button onClick={takePhotoWithTimer} disabled={countdown !== null} className="mt-4">
-                  {countdown !== null ? `Taking photo in ${countdown}s...` : "Take Photo"}
+                  {countdown !== null ? `Taking photo adjust your cloth` : "Take Photo"}
                 </Button>
               </div>
             ) : (
