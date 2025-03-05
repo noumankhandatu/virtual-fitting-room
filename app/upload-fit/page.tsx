@@ -58,32 +58,43 @@ export default function UploadFit() {
 
   const takePhoto = () => {
     if (!videoRef.current) {
-      console.error("Video element not found!");
+      console.log("Video element not found!");
+      return;
+    }
+
+    const video = videoRef.current;
+
+    // Ensure video is playing before taking a photo
+    if (video.readyState < HTMLMediaElement.HAVE_ENOUGH_DATA || video.paused) {
+      console.log("Video not ready yet! Waiting for video to load...");
       return;
     }
 
     const canvas = document.createElement("canvas");
-    const video = videoRef.current;
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) {
-      console.error("Failed to get 2D context from canvas!");
+      console.log("Failed to get 2D context from canvas!");
       return;
     }
 
-    // Flip the image back when drawing
+    ctx.save(); // Save canvas state
     ctx.translate(canvas.width, 0);
     ctx.scale(-1, 1);
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    ctx.restore(); // Restore to prevent unwanted effects
 
     const image = canvas.toDataURL("image/jpeg");
     setSelectedImage(image);
 
-    // Stop the camera stream
+    // Stop camera stream properly
     const stream = video.srcObject as MediaStream;
-    stream?.getTracks().forEach((track) => track.stop());
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      video.srcObject = null; // Clear the video source
+    }
 
     setShowCamera(false);
   };
