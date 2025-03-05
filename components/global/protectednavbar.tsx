@@ -34,7 +34,6 @@ const ProtectedNavbar = () => {
                 <button>
                   <Avatar className="cursor-pointer">
                     <AvatarImage src={user?.picture || "https://github.com/shadcn.png"} />
-                    <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </button>
               </PopoverTrigger>
@@ -44,7 +43,6 @@ const ProtectedNavbar = () => {
                   {/* User Avatar */}
                   <Avatar className="w-16 h-16 mb-2">
                     <AvatarImage src={user?.picture || "https://github.com/shadcn.png"} />
-                    <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
 
                   {/* User Details */}
