@@ -131,7 +131,7 @@ export default function AllItems() {
 
         {/* Image Upload & Camera Section */}
         <div className="flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center mb-10 p-10 bg-gray-100 rounded-2xl w-full lg:w-[80%]">
+          <div className="flex flex-col items-center justify-center mb-10 p-10 bg-gray-100 rounded-[70px] w-full lg:w-[80%]">
             {showCamera ? (
               <div className="relative w-full max-w-md flex flex-col items-center">
                 <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl transform scale-x-[-1]" />
@@ -196,7 +196,7 @@ export default function AllItems() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-32 gap-10">
           {categoryProducts.map((product) => (
             <Link key={product.id} href={`/items/${gender}/${slug}/${product.id}`} className="group">
-              <div className="bg-[#EDEDED] aspect-[4/5] relative overflow-hidden rounded-3xl">
+              <div className="bg-[#EDEDED] aspect-[4/5] relative overflow-hidden rounded-3xl flex items-center justify-center">
                 <Image
                   src={product.image}
                   alt={product.name}

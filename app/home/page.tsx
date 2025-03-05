@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -60,30 +60,26 @@ export default function HomePage() {
             <p className="text-white text-xl mb-12">Where fashion meets technology</p>
 
             {/* Features */}
-            <div className="bg-black/40 backdrop-blur-sm rounded-3xl p-8 mb-12">
+            <div className="bg-black/40 backdrop-blur-sm rounded-[70px] p-8 mb-12">
               <div className="space-y-8">
                 <div className="flex items-start space-x-6">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#8B6E5B] text-2xl font-bold">
-                    1
-                  </div>
+                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#8B6E5B] text-2xl font-bold">1</div>
                   <div>
                     <h3 className="text-white text-2xl font-bold mb-2">Explore & Experience the Virtual Try-On</h3>
                     <p className="text-white/80">
-                      Browse through our catalog and test out the virtual try-on feature. Upload your own photos or take
-                      new ones to see how each item looks in real-time.
+                      Browse through our catalog and test out the virtual try-on feature. Upload your own photos or take new ones to see how each item
+                      looks in real-time.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-6">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#8B6E5B] text-2xl font-bold">
-                    2
-                  </div>
+                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#8B6E5B] text-2xl font-bold">2</div>
                   <div>
                     <h3 className="text-white text-2xl font-bold mb-2">Manage Your Catalog</h3>
                     <p className="text-white/80">
-                      Keep your collection fresh and up to date! Easily edit, remove, or add new articles to your
-                      catalog. Whether it's a seasonal update or a new trend, you're in control.
+                      Keep your collection fresh and up to date! Easily edit, remove, or add new articles to your catalog. Whether it's a seasonal
+                      update or a new trend, you're in control.
                     </p>
                   </div>
                 </div>
@@ -92,9 +88,7 @@ export default function HomePage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-[#8B6E5B] hover:bg-[#6D574A] text-white px-8 py-6 text-lg rounded-full">
-                Browse through Catalogue
-              </Button>
+              <Button className="bg-[#8B6E5B] hover:bg-[#6D574A] text-white px-8 py-6 text-lg rounded-full">Browse through Catalogue</Button>
               <Button
                 variant="outline"
                 className="border-[#8B6E5B] text-[#8B6E5B] hover:bg-[#8B6E5B] hover:text-white px-8 py-6 text-lg rounded-full"
@@ -106,6 +100,5 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -5,8 +5,8 @@ export function NavBar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-transparent">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-white text-3xl font-bold">
-          <img src="/logo.svg" alt="" />
+        <Link href="/" className="text-white  font-bold">
+          <img src="/logo.svg" alt="" className="w-[80%]" />
         </Link>
         <div className=" md:flex space-x-8 items-center">
           <Button

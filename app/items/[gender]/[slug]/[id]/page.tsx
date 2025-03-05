@@ -59,7 +59,7 @@ export default function ProductDetail() {
               data-aos="fade-down"
               className="  bg-[#D9D9D9] lg:h-[320px] lg:w-[400px] relative flex justify-center items-center rounded-[70px] shadow-2xl"
             >
-              <Image src={product.image} alt={product.name} height={300} width={300} className="h-[290px] p-2 w-auto   " />
+              <Image src={product.image} alt={product.name} height={300} width={300} className="h-[290px] p-7 lg:p-2 w-auto   " />
             </div>
           </div>
           <div data-aos="fade-down" className="space-y-6">
@@ -68,7 +68,7 @@ export default function ProductDetail() {
             <p className="text-xl font-medium bebas-font"> {product.description}</p>
             <div style={{ height: 10 }} />
             <Link href={"/upload-fit"}>
-              <Button className="w-full h-[50px] bebas-font rounded-3xl" size="lg" onClick={handleGarmentImage}>
+              <Button className="w-full h-[50px] bebas-font rounded-[70px]" size="lg" onClick={handleGarmentImage}>
                 Try On Virtually
               </Button>
             </Link>

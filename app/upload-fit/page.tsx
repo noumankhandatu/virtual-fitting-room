@@ -109,7 +109,7 @@ export default function UploadFit() {
         </button>
       </div>
       <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center">
-        <div className="w-full max-w-lg md:max-w-2xl p-6  lg:p-20 bg-gray-100 rounded-2xl">
+        <div className="w-full max-w-lg md:max-w-2xl p-6  lg:p-20 bg-gray-100 rounded-[70px]">
           {showCamera ? (
             <div className="relative w-full h-80">
               <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-2xl transform scale-x-[-1]" />
