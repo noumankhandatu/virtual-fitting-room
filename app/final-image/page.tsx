@@ -138,15 +138,22 @@ const Page = () => {
               </div>
             )}
             {/* API Call Button */}
-            <Button
-              onClick={handleApiCall}
-              disabled={loading}
-              className={`mt-8 text-white text-lg px-10 py-3 h-[50px] rounded-full shadow-lg ${
-                loading ? "bg-gray-500 cursor-not-allowed" : "bg-black hover:bg-black/80"
-              }`}
-            >
-              {loading ? "Processing..." : "Try On Outfit"}
-            </Button>
+            {loading && (
+              <div className=" flex justify-center items-center">
+                <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
+              </div>
+            )}
+            {!loading && (
+              <Button
+                onClick={handleApiCall}
+                disabled={loading}
+                className={`mt-8 text-white text-lg px-10 py-3 h-[50px] rounded-full shadow-lg ${
+                  loading ? "bg-gray-500 cursor-not-allowed" : "bg-black hover:bg-black/80"
+                }`}
+              >
+                {loading ? "Processing..." : "Try On Outfit"}
+              </Button>
+            )}
           </div>
         </>
       )}
