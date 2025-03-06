@@ -20,7 +20,9 @@ const ProtectedNavbar = () => {
       <nav className="p-4">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
-          <Image src="/logo.svg" alt="Virtual Vogue" width={150} height={150} className="object-contain" />
+          <Link href="/gender-fit">
+            <Image src="/logo.svg" alt="Virtual Vogue" width={150} height={150} className="object-contain" />
+          </Link>
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-8">

@@ -159,9 +159,9 @@ export default function AllItems() {
                       <p className="mt-2 text-lg font-medium">Upload Garment</p>
                       <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept="image/*" className="hidden" />
                     </div>
-                    <Button variant="outline" onClick={() => setShowCamera(true)}>
+                    {/* <Button variant="outline" onClick={() => setShowCamera(true)}>
                       <Camera className="w-6 h-6 mr-2" /> Capture
-                    </Button>
+                    </Button> */}
                   </>
                 )}
 
@@ -169,16 +169,6 @@ export default function AllItems() {
                   <div className="flex items-center justify-center flex-col">
                     <Image src={selectedImage} alt="Preview" width={200} height={200} className="rounded-lg mt-4 h-[300px] w-auto" />
                     <div className="flex gap-2">
-                      <Button
-                        onClick={() => {
-                          setSelectedImage(null);
-                          setShowCamera(true);
-                        }}
-                        className="mt-4"
-                      >
-                        Retake
-                      </Button>
-
                       <Link href={"/upload-fit"}>
                         <Button onClick={() => handleGarmentImage(selectedImage!)} variant="outline" className="mt-4">
                           Continue
