@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
-const images = ["/men.png", "/women.png"];
+const images = ["/home 1.jpg", "/home 2.jpg"];
 
 export function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -40,18 +42,21 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-black/20 z-10" />
 
       {/* Content */}
-      <div className="relative h-full flex items-center z-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl ml-auto">
-            <h1 className="text-white">
-              <i className="block font-script text-6xl md:text-7xl mb-4 itallic-font lg:text-left text-center">Bringing the</i>
-              <span className="block text-5xl md:text-7xl text-black font-bold mb-4 bebas-font lg:text-left text-center">FITTING ROOM</span>
-              <span className="block font-script text-7xl text-white  md:text-7xl itallic-font lg:text-left text-center">to you</span>
-            </h1>
-            <p className="text-white/90 text-lg mt-6 mb-8 max-w-lg lg:text-left text-center">
-              See how outfits fit on you instantly with our AI-powered Virtual Try-On!
-            </p>
-          </div>
+      <div className="relative h-full flex items-end justify-center z-20 pb-10">
+        <div className="flex w-full justify-center items-center">
+          <h1 className="text-white lg:w-[600px] rounded-[43px] p-3 opacity-70 bg-[#3F3932] ">
+            <i className="block font-script text-6xl md:text-7xl mb-4 itallic-font text-left text-[#A89172DB]">Bringing the</i>
+            <span className="block text-5xl md:text-7xl font-bold mb-4 bebas-font text-center text-white">FITTING ROOM</span>
+            <span className="block font-script text-7xl md:text-7xl itallic-font text-right text-[#A89172DB]">to you</span>
+
+            {/* Buttons Container */}
+            <Link href="/api/auth/login">
+              <div className="flex justify-between flex-col lg:flex-row gap-4 mt-6 w-full">
+                <Button className="lg:w-1/2 rounded-full bg-[#A89172] text-white py-6">Login to Try-on!</Button>
+                <Button className="lg:w-1/2 rounded-full bg-white hover:text-white text-black py-6">Login as Corporate </Button>
+              </div>
+            </Link>
+          </h1>
         </div>
       </div>
 
