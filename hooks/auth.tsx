@@ -13,9 +13,8 @@ const Auth = () => {
     if (isLoading) return; // Wait until authentication status is determined
 
     if (user) {
-      // If logged in and on "/", redirect to "/gender-fit"
       if (window.location.pathname === "/") {
-        router.push("/gender-fit");
+        router.push("/men-women-styles");
       }
     } else {
       // If logged out and not on "/", redirect to "/"

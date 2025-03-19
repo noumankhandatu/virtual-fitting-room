@@ -25,16 +25,21 @@ const ProtectedNavbar = () => {
       <nav className="p-4">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
-          <Link href="/gender-fit">
+          <Link href="/men-women-styles">
             <Image src="/logo.svg" alt="Virtual Vogue" width={150} height={150} className="object-contain" />
           </Link>
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-8">
-            <Link href="/gender-fit" className="text-gray-800 hover:text-gray-600 transition text-[20px] bebas-font hidden md:flex">
-              Gender Fit
+            <Link href="/men-women-styles" className="text-gray-800 hover:text-gray-600 transition text-[20px] bebas-font hidden md:flex">
+              Home
             </Link>
-
+            <Link href="/about" className="text-gray-800 hover:text-gray-600 transition text-[20px] bebas-font hidden md:flex">
+              About
+            </Link>
+            <Link href="/guide" className="text-gray-800 hover:text-gray-600 transition text-[20px] bebas-font hidden md:flex">
+              Guide
+            </Link>
             {/* Profile Dropdown */}
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>

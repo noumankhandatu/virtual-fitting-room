@@ -8,14 +8,11 @@ const images = ["/home 1.jpg", "/home 2.jpg"];
 
 export function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIsTransitioning(true);
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setIsTransitioning(false);
       }, 500);
     }, 3000);
 
@@ -58,18 +55,6 @@ export function HeroSection() {
             </Link>
           </h1>
         </div>
-      </div>
-
-      {/* Image Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-all duration-300 
-              ${currentImageIndex === index ? "bg-white w-4" : "bg-white/50"}`}
-            onClick={() => setCurrentImageIndex(index)}
-          />
-        ))}
       </div>
     </section>
   );
