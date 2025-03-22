@@ -24,7 +24,6 @@ export default function SignUp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Add your registration logic here
-    console.log("Sign up attempted with:", { ...formData, dateOfBirth: date });
   };
 
   return (

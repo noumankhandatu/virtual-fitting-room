@@ -79,7 +79,7 @@ export function HeroSection() {
 
       {/* Edit Catalog Button - Positioned Bottom Right */}
       <div className="fixed bottom-5 right-5 z-50">
-        <Link href="/edit-catalog">
+        <Link href="/admin">
           <button className="flex items-center gap-2 h-[40px] px-4 sm:px-6 py-2 rounded-full bg-black text-white uppercase shadow-lg hover:bg-gray-800 transition text-sm sm:text-base">
             <FiEdit size={18} />
             Edit Catalog

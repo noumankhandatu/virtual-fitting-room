@@ -36,7 +36,7 @@ export default function HomePage() {
               <a href="/about" className="text-white font-medium">
                 ABOUT
               </a>
-              <a href="/edit-catalog" className="text-white font-medium">
+              <a href="/admin" className="text-white font-medium">
                 EDIT CATALOG
               </a>
               <Link href="/gender-fit" className="text-white hover:text-gray-300 transition">

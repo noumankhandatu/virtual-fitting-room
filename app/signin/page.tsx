@@ -18,7 +18,6 @@ export default function SignIn() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Add your authentication logic here
-    console.log("Sign in attempted with:", { email, password });
   };
 
   return (

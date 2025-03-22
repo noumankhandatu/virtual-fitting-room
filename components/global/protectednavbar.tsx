@@ -17,9 +17,6 @@ const ProtectedNavbar = () => {
 
   const userRoles = user?.["https://virtual-fitting-room-eight.vercel.app/roles"] || [];
 
-  console.log(userRoles, "user");
-  console.log(user, "user");
-
   return (
     <div>
       <nav className="p-4">

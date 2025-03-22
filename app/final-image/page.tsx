@@ -40,8 +40,6 @@ const Page = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("API Response:", response.data);
-
       if (response.data?.images?.length > 0) {
         // Convert Base64 to Data URL
         const base64Image = response.data.images[0];
