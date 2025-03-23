@@ -11,6 +11,7 @@ import Loader from "@/components/loader";
 import { products } from "@/data/product-data";
 import { Button } from "@/components/ui/button";
 import { useAppStore } from "@/zustand/store";
+import axios from "axios";
 
 export default function AllItems() {
   const router = useRouter();
@@ -22,6 +23,23 @@ export default function AllItems() {
   const [showCamera, setShowCamera] = useState(false);
   const [countdown, setCountdown] = useState<number | null>(null);
   const { setGarmentImage } = useAppStore();
+  const [allProducts, setAllProducts] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/all-products");
+        setAllProducts(response.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     if (showCamera) {
@@ -112,9 +130,10 @@ export default function AllItems() {
 
   const { isLoading } = useProtectedRoute();
   if (isLoading) return <Loader />;
+  if (loading) return <Loader />;
 
   const categoryKey = `${gender} ${slug}`;
-  const categoryProducts = products[categoryKey] || [];
+  const categoryProducts = allProducts[categoryKey] || [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -184,22 +203,26 @@ export default function AllItems() {
 
         {/* Clothing Items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-32 gap-10">
-          {categoryProducts.map((product) => (
-            <Link key={product.id} href={`/items/${gender}/${slug}/${product.id}`} className="group">
-              <div className="bg-[#EDEDED] aspect-[4/5] relative overflow-hidden rounded-3xl flex items-center justify-center">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={300}
-                  height={400}
-                  className="object-center p-5 transform group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="mt-4 text-center">
-                <h3 className="text-xl font-medium text-gray-900 group-hover:text-gray-600 transition bebas-font">{product.name}</h3>
-              </div>
-            </Link>
-          ))}
+          {categoryProducts.map((product: any) => {
+            console.log(product, "product");
+
+            return (
+              <Link key={product.id} href={`/items/${gender}/${slug}/${product.id}`} className="group">
+                <div className="bg-[#EDEDED] aspect-[4/5] relative overflow-hidden rounded-3xl flex items-center justify-center">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={220}
+                    height={240}
+                    className=" h-[240px] w-[220px] bg-transparent p-5 transform group-hover:scale-105 transition-transform duration-300 rounded-3xl"
+                  />
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-xl font-medium text-gray-900 group-hover:text-gray-600 transition bebas-font">{product.name}</h3>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -8,18 +8,37 @@ import { Button } from "@/components/ui/button";
 import ProtectedNavbar from "@/components/global/protectednavbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Loader from "@/components/loader";
-import { products } from "@/data/product-data";
 import { useAppStore } from "@/zustand/store";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ProductDetail() {
   const router = useRouter();
   const { gender, slug, id } = useParams();
   const { isLoading } = useProtectedRoute();
   const { setGarmentImage } = useAppStore();
+  const [allProducts, setAllProducts] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/all-products");
+        setAllProducts(response.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   if (isLoading) return <Loader />;
+  if (loading) return <Loader />;
   const categoryKey = `${gender} ${slug}`;
-  const categoryProducts = products[categoryKey] || [];
-  const product = categoryProducts.find((item) => item.id === id);
+  const categoryProducts = allProducts[categoryKey] || [];
+  const product = categoryProducts.find((item: any) => item.id === id);
 
   if (!product) {
     return (
