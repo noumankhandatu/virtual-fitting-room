@@ -41,10 +41,16 @@ export function ProductsGrid({ category }: ProductsGridProps) {
       setError(null);
 
       console.log(`Fetching products for category: ${category}`);
-      const response = await fetch(`/api/products?category=${encodeURIComponent(category)}`);
+
+      const url = `${process.env.NEXT_PUBLIC_BACKENDURL}/api/products?category=${encodeURIComponent(category)}`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
-        console.error("API response not OK:", response.status, response.statusText);
         throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);
       }
 
@@ -122,7 +128,7 @@ export function ProductsGrid({ category }: ProductsGridProps) {
 
       {/* Edit Product Dialog */}
       <Dialog open={!!editingProduct} onOpenChange={(open) => !open && setEditingProduct(null)}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md max-h-[80vh] overflow-y-auto border-white">
           <DialogTitle>Edit Product</DialogTitle>
           {editingProduct && (
             <ProductForm
@@ -131,6 +137,7 @@ export function ProductsGrid({ category }: ProductsGridProps) {
                 setEditingProduct(null);
                 fetchProducts();
               }}
+              myHeight={"500px"}
               onCancel={() => setEditingProduct(null)}
             />
           )}

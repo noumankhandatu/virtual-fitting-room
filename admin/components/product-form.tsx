@@ -17,9 +17,10 @@ interface ProductFormProps {
   product?: Product;
   onSuccess?: () => void;
   onCancel?: () => void;
+  myHeight?: any;
 }
 
-export function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) {
+export function ProductForm({ product, onSuccess, onCancel, myHeight = "auto" }: ProductFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -71,7 +72,7 @@ export function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) 
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("/api/upload", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -112,7 +113,9 @@ export function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) 
     setIsLoading(true);
 
     try {
-      const url = product?._id ? `/api/products/${product._id}` : "/api/products";
+      const url = product?._id
+        ? `${process.env.NEXT_PUBLIC_BACKENDURL}/api/products/${product._id}`
+        : `${process.env.NEXT_PUBLIC_BACKENDURL}/api/products`;
 
       const method = product?._id ? "PUT" : "POST";
 
@@ -138,8 +141,10 @@ export function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) 
     }
   };
 
+  console.log(imagePreview, "imagePreview");
+
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className={`w-full max-w-md mx-auto bg-white h-[${myHeight}]`}>
       <CardHeader>
         <CardTitle>{product ? "Edit Product" : "Add New Product"}</CardTitle>
       </CardHeader>
@@ -157,10 +162,10 @@ export function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) 
 
           <div className="space-y-2">
             <Label>Product Image</Label>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center justify-center gap-4">
               {imagePreview ? (
-                <div className="relative w-full h-48 bg-gray-100 rounded-md overflow-hidden">
-                  <Image src={imagePreview || "/placeholder.svg"} alt="Product preview" fill className="object-contain" />
+                <div className="relative flex justify-center items-center w-full h-48 bg-gray-100 rounded-md overflow-hidden">
+                  <Image src={imagePreview} alt="Product preview" className="object-contain h-[200px] w-[200px]" height={200} width={200} />
                   <button
                     type="button"
                     onClick={removeImage}
@@ -175,7 +180,7 @@ export function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) 
                   onClick={handleImageClick}
                   className="w-full h-48 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center cursor-pointer hover:border-gray-400 transition"
                 >
-                  <Upload className="h-8 w-8 text-gray-400 mb-2" />
+                  <Upload className="h-20 w-20 p-5 text-gray-400 mb-4 mt-4 " />
                   <p className="text-sm text-gray-500">Click to upload product image</p>
                 </div>
               )}

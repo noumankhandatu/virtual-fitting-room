@@ -4,11 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Camera, Upload } from "lucide-react";
+import { ArrowLeft, Upload } from "lucide-react";
 import ProtectedNavbar from "@/components/global/protectednavbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Loader from "@/components/loader";
-import { products } from "@/data/product-data";
 import { Button } from "@/components/ui/button";
 import { useAppStore } from "@/zustand/store";
 import axios from "axios";
@@ -29,7 +28,7 @@ export default function AllItems() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/all-products");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/all-products`);
         setAllProducts(response.data);
       } catch (err) {
         console.error(err);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FiEdit } from "react-icons/fi"; // Edit icon
+import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { useAppStore } from "@/zustand/store";
 
@@ -37,7 +37,7 @@ const CategoryButton = ({ label, path, slug }: { label: string; path: string; sl
   );
 };
 
-export function HeroSection() {
+export function HeroSection({ roles }: any) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -78,14 +78,16 @@ export function HeroSection() {
       </div>
 
       {/* Edit Catalog Button - Positioned Bottom Right */}
-      <div className="fixed bottom-5 right-5 z-50">
-        <Link href="/admin">
-          <button className="flex items-center gap-2 h-[40px] px-4 sm:px-6 py-2 rounded-full bg-black text-white uppercase shadow-lg hover:bg-gray-800 transition text-sm sm:text-base">
-            <FiEdit size={18} />
-            Edit Catalog
-          </button>
-        </Link>
-      </div>
+      {roles.includes("admin") && (
+        <div className="fixed bottom-5 right-5 z-50">
+          <Link href="/admin">
+            <button className="flex items-center gap-2 h-[40px] px-4 sm:px-6 py-2 rounded-full bg-black text-white uppercase shadow-lg hover:bg-gray-800 transition text-sm sm:text-base">
+              <FiEdit size={18} />
+              Edit Catalog
+            </button>
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

@@ -22,7 +22,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/all-products");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/all-products`);
         setAllProducts(response.data);
       } catch (err) {
         console.error(err);

@@ -14,7 +14,7 @@ export default function AddProductPage() {
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="mb-8">
-        <Link href="/">
+        <Link href="/men-women-styles">
           <Button variant="outline">← Back to Products</Button>
         </Link>
       </div>
