@@ -43,7 +43,7 @@ const handleDownload = async (outputImage: string, zoomLevel: number, imageRef: 
 
 const OutputImageDialog = ({ outputImage, setOutputImage }: { outputImage: string | null; setOutputImage: (value: string | null) => void }) => {
   const [zoomLevel, setZoomLevel] = useState(1);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<any>(null);
 
   // Handle zoom in
   const handleZoomIn = () => {
