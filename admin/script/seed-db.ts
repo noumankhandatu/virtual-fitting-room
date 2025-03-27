@@ -296,7 +296,7 @@ export async function seedDatabase() {
     await db.collection("products").deleteMany({});
 
     // Insert all products
-    const allProducts: Product[] = [];
+    const allProducts: any = [];
 
     Object.keys(products).forEach((category) => {
       products[category as ProductCategory].forEach((product) => {
