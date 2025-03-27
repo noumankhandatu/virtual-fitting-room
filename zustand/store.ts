@@ -16,6 +16,9 @@ type AppState = {
   setDenoiseSteps: (steps: number) => void;
   setSeed: (seed: number) => void;
   setNumberOfImages: (count: number) => void;
+
+  generated_image: string | null; // Store the generated image
+  setGeneratedImage: (image: string | null) => void; // Setter for generated image
 };
 
 export const useAppStore = create<AppState>((set) => ({
@@ -26,6 +29,7 @@ export const useAppStore = create<AppState>((set) => ({
   denoise_steps: 20,
   seed: 42,
   number_of_images: 1,
+  generated_image: null, // Initially null
 
   setGarmentImage: (file) => set({ garment_image: file }),
   setHumanImage: (file) => set({ human_image: file }),
@@ -34,4 +38,5 @@ export const useAppStore = create<AppState>((set) => ({
   setDenoiseSteps: (steps) => set({ denoise_steps: steps }),
   setSeed: (seed) => set({ seed }),
   setNumberOfImages: (count) => set({ number_of_images: count }),
+  setGeneratedImage: (image) => set({ generated_image: image }), // Setter function
 }));
