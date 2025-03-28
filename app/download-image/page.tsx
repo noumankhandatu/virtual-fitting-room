@@ -10,7 +10,6 @@ import { useAppStore } from "@/zustand/store";
 
 export default function ProductShowcase() {
   const { generated_image } = useAppStore();
-
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const imageContainerRef = useRef<HTMLDivElement>(null);
@@ -62,7 +61,7 @@ export default function ProductShowcase() {
             >
               {generated_image ? (
                 <>
-                  <Image src={generated_image} alt="Generated Outfit" height={1000} width={1000} className="w-full h-auto object-contain" />{" "}
+                  <Image src={generated_image} alt="Generated Outfit" height={1000} width={1000} className="w-full h-full object-contain" />{" "}
                   {/* Zoom effect */}
                   {isHovered && (
                     <div

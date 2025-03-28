@@ -99,6 +99,15 @@ export default function UploadFit() {
   const { isLoading } = useProtectedRoute();
   if (isLoading) return <Loader />;
 
+  const myMens = [
+    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177027/MDAwMzRfMDBfLV9Db3B5X2h0aXBuag==/drilldown",
+    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDAwMzVfMDBfaXhqaGp4/drilldown",
+    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDE5OTJfMDBfZGFkaHZ1/drilldown",
+    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/c2FtMV8xX3pvandjaQ==/drilldown",
+    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/SmVuc2VuX2xtdGhqYg==/drilldown",
+    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743175154/OGEzYWEyNjAtYzMzNi00Yjg1LWIxYTctODg5ZGJlOGJiZTZjX2J2anMxeg==/drilldown",
+  ];
+
   return (
     <div className="bg-white min-h-screen">
       <ProtectedNavbar />
@@ -151,6 +160,28 @@ export default function UploadFit() {
             TRY-ON!
           </Button>
         )}
+        <div style={{ height: 50 }} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-32 gap-10">
+          {myMens.map((product: any, index: number) => {
+            return (
+              <div
+                key={index}
+                className="bg-[#EDEDED] aspect-[4/5] relative overflow-hidden rounded-3xl flex items-center justify-center cursor-pointer"
+                onClick={() => {
+                  setSelectedImage(product); // Update selected image
+                }}
+              >
+                <Image
+                  src={product}
+                  alt="image"
+                  width={220}
+                  height={240}
+                  className="h-[240px] w-[220px] bg-transparent p-5 transform group-hover:scale-105 transition-transform duration-300 rounded-3xl"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
