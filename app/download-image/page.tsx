@@ -55,14 +55,14 @@ export default function ProductShowcase() {
             {/* Left side - Image */}
             <div
               ref={imageContainerRef}
-              className="relative h-[400px] overflow-hidden cursor-zoom-in"
+              className="relative min-h-[400px] overflow-hidden cursor-zoom-in"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onMouseMove={handleMouseMove}
             >
               {generated_image ? (
                 <>
-                  <Image src={generated_image} alt="Generated Outfit" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
+                  <Image src={generated_image} alt="Generated Outfit" height={1000} width={1000} className="w-full h-auto object-contain" />{" "}
                   {/* Zoom effect */}
                   {isHovered && (
                     <div
