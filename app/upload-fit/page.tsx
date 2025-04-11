@@ -101,11 +101,11 @@ export default function UploadFit() {
 
   const myMens = [
     "https://iili.io/3ccXnb2.jpg",
-    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDAwMzVfMDBfaXhqaGp4/drilldown",
-    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDE5OTJfMDBfZGFkaHZ1/drilldown",
-    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/c2FtMV8xX3pvandjaQ==/drilldown",
-    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/SmVuc2VuX2xtdGhqYg==/drilldown",
-    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743175154/OGEzYWEyNjAtYzMzNi00Yjg1LWIxYTctODg5ZGJlOGJiZTZjX2J2anMxeg==/drilldown",
+    "https://iili.io/3cldYP4.jpg",
+    "https://iili.io/3cldGR9.jpg",
+    "https://iili.io/3cld0SS.jpg",
+    "https://iili.io/3cldEH7.jpg",
+    "https://iili.io/3ccXnb2.jpg",
   ];
 
   return (
