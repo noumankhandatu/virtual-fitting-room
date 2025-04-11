@@ -105,7 +105,6 @@ export default function UploadFit() {
     "https://iili.io/3cldGR9.jpg",
     "https://iili.io/3cld0SS.jpg",
     "https://iili.io/3cldEH7.jpg",
-    "https://iili.io/3ccXnb2.jpg",
   ];
 
   return (
