@@ -100,12 +100,12 @@ export default function UploadFit() {
   if (isLoading) return <Loader />;
 
   const myMens = [
-    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177027/MDAwMzRfMDBfLV9Db3B5X2h0aXBuag==/drilldown",
-    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDAwMzVfMDBfaXhqaGp4/drilldown",
-    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDE5OTJfMDBfZGFkaHZ1/drilldown",
-    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/c2FtMV8xX3pvandjaQ==/drilldown",
-    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/SmVuc2VuX2xtdGhqYg==/drilldown",
-    "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743175154/OGEzYWEyNjAtYzMzNi00Yjg1LWIxYTctODg5ZGJlOGJiZTZjX2J2anMxeg==/drilldown",
+    "https://iili.io/3ccXnb2.jpg",
+    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDAwMzVfMDBfaXhqaGp4/drilldown",
+    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/MDE5OTJfMDBfZGFkaHZ1/drilldown",
+    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/c2FtMV8xX3pvandjaQ==/drilldown",
+    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743177026/SmVuc2VuX2xtdGhqYg==/drilldown",
+    // "https://res-console.cloudinary.com/noumancloud/thumbnails/v1/image/upload/v1743175154/OGEzYWEyNjAtYzMzNi00Yjg1LWIxYTctODg5ZGJlOGJiZTZjX2J2anMxeg==/drilldown",
   ];
 
   return (
